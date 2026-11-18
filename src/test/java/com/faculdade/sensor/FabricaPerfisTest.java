@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** A fábrica de flyweights: o compartilhamento é o coração do padrão. */
 class FabricaPerfisTest {
 
     private final FabricaPerfis fabrica = new FabricaPerfis();

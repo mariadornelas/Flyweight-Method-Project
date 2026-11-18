@@ -6,7 +6,6 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** O cenário completo da demonstração: milhares de sensores, poucos perfis. */
 class FlyweightIntegracaoTest {
 
     private static final int POR_TIPO = 3000;
@@ -48,8 +47,8 @@ class FlyweightIntegracaoTest {
     void estadoExtrinsecoDeveContinuarIndividualApesarDoCompartilhamento() {
         montar();
 
-        SensorInstalado primeiro = parque.buscar("T-0000").orElseThrow();   // leitura 60
-        SensorInstalado ultimo = parque.buscar("T-2999").orElseThrow();     // 2999 % 40 = 39 -> 99
+        SensorInstalado primeiro = parque.buscar("T-0000").orElseThrow();
+        SensorInstalado ultimo = parque.buscar("T-2999").orElseThrow();
 
         assertSame(primeiro.getPerfil(), ultimo.getPerfil());
         assertEquals(60.0, primeiro.getUltimaLeitura().getAsDouble());
@@ -64,9 +63,6 @@ class FlyweightIntegracaoTest {
     void contagemPorNivelDeveBaterComOsCalculosEsperados() {
         montar();
 
-        // temperatura: 60..99 em ciclos de 40 -> 20 normais, 10 alertas, 10 críticos por ciclo (75 ciclos)
-        // pressão: 0..11 em ciclos de 12 -> 8 / 2 / 2 por ciclo (250 ciclos)
-        // vibração: 0..9 em ciclos de 10 -> 5 / 3 / 2 por ciclo (300 ciclos)
         Map<Nivel, Long> c = parque.contarPorNivel();
 
         assertEquals(1500L + 2000L + 1500L, c.get(Nivel.NORMAL));
@@ -79,7 +75,6 @@ class FlyweightIntegracaoTest {
     void semFlyweightHaveriaUmPerfilPorSensorEComFlyweightHaUmPorModelo() {
         montar();
 
-        // O pool cresce com o número de MODELOS, não com o de sensores.
         int sensores = parque.quantidade();
         int perfis = fabrica.quantidade();
 

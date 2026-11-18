@@ -7,7 +7,6 @@ import java.lang.reflect.Modifier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** O flyweight: estado intrínseco imutável, operações com estado extrínseco por argumento. */
 class PerfilSensorTest {
 
     private final FabricaPerfis fabrica = new FabricaPerfis();
@@ -61,8 +60,6 @@ class PerfilSensorTest {
         assertDoesNotThrow(() -> fabrica.obter("X", "u", 0, 10, 0, 10));
     }
 
-    // ---- o que torna seguro compartilhar ----
-
     @Test
     void todosOsCamposDevemSerFinais() {
         for (Field f : PerfilSensor.class.getDeclaredFields()) {
@@ -83,7 +80,7 @@ class PerfilSensorTest {
     @Test
     void classificarNaoDeveGuardarMemoriaEntreChamadas() {
         assertEquals(Nivel.CRITICO, termopar.classificar(95));
-        assertEquals(Nivel.NORMAL, termopar.classificar(20));   // a chamada anterior não influencia
+        assertEquals(Nivel.NORMAL, termopar.classificar(20));
         assertEquals(Nivel.CRITICO, termopar.classificar(95));
     }
 

@@ -7,7 +7,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** O contexto: estado extrínseco próprio de cada sensor, perfil compartilhado. */
 class SensorInstaladoTest {
 
     private final FabricaPerfis fabrica = new FabricaPerfis();
@@ -83,7 +82,6 @@ class SensorInstaladoTest {
 
     @Test
     void sensorNaoDeveGuardarLimitesNemFaixa() {
-        // O estado intrínseco mora só no perfil; o sensor guarda apenas o que é só dele.
         List<String> campos = java.util.Arrays.stream(SensorInstalado.class.getDeclaredFields())
                 .map(Field::getName).toList();
 
